@@ -1,0 +1,164 @@
+$breakpoints: ('sm': 'screen and (min-width: 400px)',
+'md': 'screen and (min-width: 768px)',
+'lg': 'screen and (min-width: 1000px)',
+'xl': 'screen and (min-width: 1200px)',
+) !default;
+
+@mixin mq($breakpoint: md) {
+    @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+    }
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #f1f1ab;
+    font-family: "M PLUS Rounded 1c", "Sawarabi Mincho";
+    text-align: justify;
+    text-justify: inter-ideograph;
+    margin: 0;
+}
+
+div.main_content {
+    margin: 0 auto;
+    min-height: 75vh;
+    background-color: #f1f1ab;
+    & p{
+        font-family: "M PLUS Rounded 1c";
+    }
+    @include mq() {
+        width: 768px;
+    }
+}
+
+.start_page {
+    margin: 30px 2vw 0 2vw;
+    padding: 5px 2vw 20px 2vw;
+    background-color: #ffc82f;
+    & .title {
+        background-color: #ffff2f;
+        margin-bottom: 5vh;
+        @include mq() {
+            font-size: 1.5rem;
+        }
+        &>h1{
+            font-size: 1.5rem;
+            margin: 30px 1vw 0 1vw;
+        }
+        &>h2{
+            font-size:1.25rem;
+            margin: 0 1vw 0 1vw;
+        }
+
+    }
+    & .btn_parent{
+        margin-top: 2em;
+    }
+}
+@mixin sqbtn($size: 120px, $bg: #ff8181, $bb: #bd6565) {
+    margin: 3px;
+    font-size: 1.25rem;
+    display: inline-block;
+    text-decoration: none;
+    background: $bg;
+    color: #FFF;
+    width: $size;
+    height: $size;
+    line-height: $size;
+    border-radius: 50%;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    overflow: hidden;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px $bb;
+    transition: .4s;
+
+    &:active {
+        -ms-transform: translateY(2px);
+        -webkit-transform: translateY(2px);
+        transform: translateY(2px);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+        border-bottom: none;
+    }
+}
+
+.btn_parent {
+    $size: 120px;
+    text-align: center;
+    height: $size + 12px;
+
+    &>.start_btn {
+        @include sqbtn($size);
+    }
+
+    &>.yes_btn {
+        @include sqbtn($size, $bg: #06d328, $bb:#026821);
+    }
+
+    &>.no_btn {
+        @include sqbtn($size, $bg: #fc3d3d, $bb: #be0606);
+    }
+}
+
+.quest_bg, .result {
+    display: none;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(148, 148, 148);
+}
+
+.slide_question_base {
+    display: none
+}
+
+.slide_question {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    background: rgb(148, 148, 148);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .slide_inner {
+        width: 100vw;
+        @include mq() {
+            width: auto;
+        }
+        margin: 3px;
+        padding: 1em;
+        overflow: auto;
+        overflow-x: hidden;
+        background: #ddd;
+
+        &>h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        &>p {
+            margin-bottom: 30px;
+        }
+
+        &>.answer_box {
+            display: table;
+            margin: auto;
+
+            &>div {
+                display: table-cell;
+            }
+        }
+    }
+}
