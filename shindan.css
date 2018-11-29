@@ -37,6 +37,12 @@ div.main_content p {
   margin-bottom: 5vh;
 }
 
+@media screen and (min-width: 768px) {
+  .start_page .title {
+    font-size: 1.5rem;
+  }
+}
+
 .start_page .title > h1 {
   font-size: 1.5rem;
   margin: 30px 1vw 0 1vw;
@@ -45,12 +51,6 @@ div.main_content p {
 .start_page .title > h2 {
   font-size: 1.25rem;
   margin: 0 1vw 0 1vw;
-}
-
-@media screen and (min-width: 768px) {
-  .start_page .title {
-    font-size: 1.5rem;
-  }
 }
 
 .start_page .btn_parent {
@@ -193,6 +193,12 @@ div.main_content p {
   overflow: auto;
   overflow-x: hidden;
   background: #ddd;
+}
+
+@media screen and (min-width: 768px) {
+  .slide_question .slide_inner {
+    width: auto;
+  }
 }
 
 .slide_question .slide_inner > h2 {
