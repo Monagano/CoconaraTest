@@ -126,17 +126,21 @@ Shindan.Init = function(){
         Shindan.State.AnsNo++;
         Shindan.MakeNextQuestion();
         $('.quest_bg').show();
-        $quest = $('.slide_question').last();
+        $quest = $('.slide_question').last();//show slide
         Shindan.ShowSlide($quest);
     });
     $('.main_content').on('click', '.quest_btn', function () {
+        var currentQ = Shindan.Questions.filter(function(val){
+            return val.status === Shindan.State.AnsNo;
+        });
+        currentQ[0].result = $(this).hasClass("yes_btn");
         Shindan.State.AnsNo++;
         Shindan.MakeNextQuestion();
-        Shindan.ShowSlide($(this).closest('.slide_question'));
+        Shindan.ShowSlide($(this).closest('.slide_question'));//hide slide
         if(Shindan.State.AnsNo > Shindan.Questions.length){
             return;
         }
-        $quest = $('.slide_question').last();
+        $quest = $('.slide_question').last();//show slide
         Shindan.ShowSlide($quest);
     });
 };
