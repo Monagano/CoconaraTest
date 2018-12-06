@@ -18,6 +18,7 @@ div.main_content {
 
 div.main_content p {
   font-family: "M PLUS Rounded 1c";
+  line-height: 1.73;
 }
 
 @media screen and (min-width: 768px) {
@@ -86,7 +87,7 @@ div.main_content p {
 
 .btn_parent > .start_btn:active {
   -webkit-transform: translateY(2px);
-  transform: translateY(2px);
+          transform: translateY(2px);
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
           box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
   border-bottom: none;
@@ -116,7 +117,7 @@ div.main_content p {
 
 .btn_parent > .yes_btn:active {
   -webkit-transform: translateY(2px);
-  transform: translateY(2px);
+          transform: translateY(2px);
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
           box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
   border-bottom: none;
@@ -146,15 +147,15 @@ div.main_content p {
 
 .btn_parent > .no_btn:active {
   -webkit-transform: translateY(2px);
-  transform: translateY(2px);
+          transform: translateY(2px);
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
           box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
   border-bottom: none;
 }
 
-.quest_bg, .result {
+.quest_bg {
   display: none;
-  z-index: 100;
+  z-index: 99;
   position: fixed;
   top: 0;
   left: 0;
@@ -163,12 +164,26 @@ div.main_content p {
   background: #949494;
 }
 
+.result {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: 0vw;
+  height: 0vh;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
 .slide_question_base {
   display: none;
 }
 
 .slide_question {
-  z-index: 100;
+  z-index: 99;
   position: fixed;
   top: 0;
   left: -100vw;

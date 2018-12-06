@@ -138,7 +138,14 @@ Shindan.Init = function(){
         Shindan.MakeNextQuestion();
         Shindan.ShowSlide($(this).closest('.slide_question'));//hide slide
         if(Shindan.State.AnsNo > Shindan.Questions.length){
-            $(".result").show();
+            var circleSize = $(window).width();
+            if (circleSize < $(window).height()){
+                circleSize = $(window).height();
+            }
+            $(".result").animate({
+                width: circleSize,
+                height: circleSize
+            }, 3000 );
             return;
         }
         $quest = $('.slide_question').last();//show slide

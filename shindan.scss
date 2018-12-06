@@ -26,10 +26,12 @@ div.main_content {
     margin: 0 auto;
     min-height: 75vh;
     background-color: #f1f1ab;
-    & p{
+
+    & p {
         font-family: "M PLUS Rounded 1c";
         line-height: 1.73;
     }
+
     @include mq() {
         width: 768px;
     }
@@ -39,26 +41,39 @@ div.main_content {
     margin: 30px 2vw 0 2vw;
     padding: 5px 2vw 20px 2vw;
     background-color: #ffc82f;
+
     & .title {
         background-color: #ffff2f;
         margin-bottom: 5vh;
+
         @include mq() {
             font-size: 1.5rem;
         }
-        &>h1{
+
+        &>h1 {
             font-size: 1.5rem;
             margin: 30px 1vw 0 1vw;
         }
-        &>h2{
-            font-size:1.25rem;
+
+        &>h2 {
+            font-size: 1.25rem;
             margin: 0 1vw 0 1vw;
         }
 
     }
-    & .btn_parent{
+
+    & .btn_parent {
         margin-top: 2em;
     }
 }
+
+@mixin transform($trans) {
+    -webkit-transform: $trans;
+    -moz-transform: $trans;
+    -ms-transform: $trans;
+    transform: $trans;
+}
+
 @mixin sqbtn($size: 120px, $bg: #ff8181, $bb: #bd6565) {
     margin: 3px;
     font-size: 1.25rem;
@@ -79,8 +94,6 @@ div.main_content {
     transition: .4s;
 
     &:active {
-        -ms-transform: translateY(2px);
-        -webkit-transform: translateY(2px);
         transform: translateY(2px);
         box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
         border-bottom: none;
@@ -105,9 +118,9 @@ div.main_content {
     }
 }
 
-.quest_bg, .result {
+.quest_bg{
     display: none;
-    z-index: 100;
+    z-index: 99;
     position: fixed;
     top: 0;
     left: 0;
@@ -115,13 +128,25 @@ div.main_content {
     height: 100vh;
     background: rgb(148, 148, 148);
 }
-
+.result {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 0vw;
+    height: 0vh;
+    border-radius: 50%;
+    background: #ffffff;
+}
 .slide_question_base {
     display: none
 }
 
 .slide_question {
-    z-index: 100;
+    z-index: 99;
     position: fixed;
     top: 0;
     left: -100vw;
@@ -135,9 +160,11 @@ div.main_content {
 
     .slide_inner {
         width: 100vw;
+
         @include mq() {
             width: auto;
         }
+
         margin: 3px;
         padding: 1em;
         overflow: auto;
