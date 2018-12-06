@@ -140,6 +140,9 @@ div.main_content {
     height: 0vh;
     border-radius: 50%;
     background: #ffffff;
+    & .slide_inner {
+        display: none;
+    }
 }
 .slide_question_base {
     display: none

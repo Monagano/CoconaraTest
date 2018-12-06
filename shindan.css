@@ -178,6 +178,10 @@ div.main_content p {
   background: #ffffff;
 }
 
+.result .slide_inner {
+  display: none;
+}
+
 .slide_question_base {
   display: none;
 }
