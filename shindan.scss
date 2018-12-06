@@ -140,8 +140,17 @@ div.main_content {
     height: 0vh;
     border-radius: 50%;
     background: #ffffff;
+    //display: flex;
+    //TODO
+    text-align: center;
+    justify-content: center;
+    align-items: center;
     & .slide_inner {
         display: none;
+        width: 100vw;
+        @include mq() {
+            width: auto;
+        }
     }
 }
 .slide_question_base {
