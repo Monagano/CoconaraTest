@@ -28,6 +28,7 @@ div.main_content {
     background-color: #f1f1ab;
     & p{
         font-family: "M PLUS Rounded 1c";
+        line-height: 1.73;
     }
     @include mq() {
         width: 768px;
