@@ -1,13 +1,24 @@
+@charset "UTF-8";
 html {
   height: 100%;
 }
 
 body {
   background-color: #f1f1ab;
-  font-family: "M PLUS Rounded 1c", "Sawarabi Mincho";
+  font-family: 'Yu Gothic Medium', '游ゴシック Medium', YuGothic, '游ゴシック体', 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
   text-align: justify;
   text-justify: inter-ideograph;
   margin: 0;
+}
+
+img {
+  width: 75%;
+}
+
+@media screen and (min-width: 768px) {
+  img {
+    width: 100%;
+  }
 }
 
 div.main_content {
@@ -17,7 +28,6 @@ div.main_content {
 }
 
 div.main_content p {
-  font-family: "M PLUS Rounded 1c";
   line-height: 1.73;
 }
 
