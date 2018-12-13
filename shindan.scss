@@ -10,28 +10,104 @@ $breakpoints: ('sm': 'screen and (min-width: 400px)',
     }
 }
 
+@mixin bg_sq($baseColor:rgba(63, 81, 181, 1), $subColor:rgba(48, 63, 159, 1)) {
+    background-color: $baseColor;
+    background-size: 10px 10px;
+    background-position: 0 0, 5px 5px;
+    background-image:
+        linear-gradient(45deg, $subColor 25%, $subColor 25%, transparent 25%,
+        transparent 75%, $subColor 75%, $subColor 75%),
+        linear-gradient(-135deg, $subColor 25%, $subColor 25%, transparent 25%, transparent 75%, $subColor 75%, $subColor 75%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($baseColor)}', endColorstr='#{ie-hex-str($subColor)}', GradientType=0);
+}
+
+@mixin bg_altstr() {
+    background:
+        linear-gradient(90deg, #ffffff 0.2em, transparent 0),
+        linear-gradient(90deg, #bbdefb 50%, transparent 0),
+        linear-gradient(90deg, #ef9a9a 50%, #7986cb 0);
+
+    background-size: 4vw, 8vw, 16vw;
+
+    @include mq() {
+        background-size: 20px, 40px, 80px;
+    }
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str(#bbdefb)}', endColorstr='#{ie-hex-str(#ef9a9a)}', GradientType=0);
+}
+
+@mixin check_point($txt:"Point!") {
+    position: relative;
+    padding-top: 55px;
+    padding-bottom: 15px;
+    border: 1px solid #83aaea;
+    background-color: #f8fdff;
+
+    &::before {
+        position: absolute;
+        top: 0.7em;
+        left: 0em;
+        content: "Point!";
+        padding: 0em 2em 0em 1.5em;
+        font-size: 90%;
+        font-weight: bold;
+        line-height: 2;
+        color: #fff;
+        width: 3.15em;
+        height: 1.9em;
+        background-color: #83aaea;
+        border-top: dashed 1px #FFF;
+        border-bottom: dashed 1px #FFF;
+        box-shadow: 0px 0px 0px 3px #83aaea;
+    }
+
+    &::after {
+        position: absolute;
+        content: '';
+        z-index: 1;
+        top: .49em;
+        left: 5.7em;
+        width: 0px;
+        height: 0px;
+        border-width: 17px 8px 17px 0px;
+        border-color: transparent #f8fdff transparent transparent;
+        border-style: solid;
+    }
+}
+
 html {
     height: 100%;
 }
 
 body {
-    background-color: #f1f1ab;
+    @include bg_altstr();
     font-family: 'Yu Gothic Medium', '游ゴシック Medium', YuGothic, '游ゴシック体', 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
     text-align: justify;
     text-justify: inter-ideograph;
     margin: 0;
 }
+
 img {
     width: 75%;
+
     @include mq() {
         width: 100%;
     }
 }
-
-div.main_content {
+.line{
+    max-width: 120px;
+}
+.center_content{
     margin: 0 auto;
+    text-align: center;
+    &>*{
+        display: inline-block;
+    }
+}
+div.main_content {
+    margin: 20px auto 20px auto;
     min-height: 75vh;
-    background-color: #f1f1ab;
+    background-color: #ffffe6;
 
     & p {
         //font-family: "M PLUS Rounded 1c";
@@ -41,31 +117,85 @@ div.main_content {
     @include mq() {
         width: 768px;
     }
+
+    @include mq('lg') {
+        width: 1000px;
+    }
 }
 
 .start_page {
-    margin: 30px 2vw 0 2vw;
-    padding: 5px 2vw 20px 2vw;
-    background-color: #ffc82f;
+    @include mq() {
+        width: 768px;
+    }
+
+    margin: 0 auto 0 auto;
+    //background-color: #ffc82f;
 
     & .title {
-        background-color: #ffff2f;
+        //background-color: #ffff2f;
         margin-bottom: 5vh;
+        text-align: center;
 
         @include mq() {
             font-size: 1.5rem;
         }
 
         &>h1 {
+            display: none;
             font-size: 1.5rem;
             margin: 30px 1vw 0 1vw;
         }
 
         &>h2 {
+            display: none;
             font-size: 1.25rem;
             margin: 0 1vw 0 1vw;
         }
 
+        &>img {
+            width: 100%;
+
+            &.pc {
+                display: none !important;
+            }
+
+            &.sp {
+                display: block !important;
+            }
+
+            @include mq() {
+                &.pc {
+                    display: block !important;
+                }
+
+                &.sp {
+                    display: none !important;
+                }
+            }
+        }
+    }
+
+    & .description {
+        padding: 5px 2vw 10px;
+        //background-color: #ffffff;
+        max-width: 600px;
+        margin: 0 auto;
+
+        .point {
+            padding-left: 1.2em;
+            padding-right: 1.2em;
+            margin-bottom: 2rem;
+            @include check_point();
+            // padding: 0.5em 1em;
+            // margin: 2em 0;
+            // color: #232323;
+            // background: #fff8e8;
+            // border-left: solid 10px #ffc06e;
+            // &>p{
+            //     margin: 0; 
+            //     padding: 0;
+            // }
+        }
     }
 
     & .btn_parent {
@@ -124,7 +254,7 @@ div.main_content {
     }
 }
 
-.quest_bg{
+.quest_bg {
     display: none;
     z-index: 99;
     position: fixed;
@@ -132,9 +262,10 @@ div.main_content {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #999999;
+    @include bg_sq(rgba(255, 228, 228, 1), rgba(255, 185, 167, 1));
 }
-.animate_circle{
+
+.animate_circle {
     display: none;
     z-index: 101;
     position: fixed;
@@ -148,6 +279,7 @@ div.main_content {
     height: 0vh;
     box-shadow: 0px 0px 0px 2000px #999999;
 }
+
 .result {
     display: none;
     z-index: 100;
@@ -156,43 +288,53 @@ div.main_content {
     left: 0;
     margin: auto;
     width: 100%;
-    background: #ffffff;
     //display: flex;
     //TODO
     text-align: center;
     justify-content: center;
     align-items: center;
+
     & .slide_inner {
-        margin: auto;
-        width: 100%;
+        background: #ffffff;
+        margin: 15px auto;
+        padding-top: 1em;
+        width: 98vw;
+
         @include mq() {
             width: 768px;
         }
-        & p{
+
+        & p {
             text-align: left;
             padding: 30px;
-            & .result_alert{
+
+            & .result_alert {
                 color: red;
             }
         }
     }
-    & .result_teach_img, .result_type_img{
+
+    & .result_teach_img,
+    .result_type_img {
         width: 75vw;
+
         @include mq() {
             width: 640px;
         }
     }
 }
+
 .result_title {
     padding: 0.2em 0.5em;
-    margin: 2em 2em 2em 2em;
+    margin: 0em 2em 2em 2em;
     color: #565656;
     background: #ffeaea;
     box-shadow: 0px 0px 0px 10px #ffeaea;
     border: dashed 2px #ffc3c3;
     border-radius: 8px;
+
     & h2 {
-        margin: 0; 
+        margin: 0;
         padding: 0;
     }
 }
@@ -209,36 +351,35 @@ div.main_content {
     width: 100vw;
     height: 100vh;
     padding: 0;
-    background: rgb(148, 148, 148);
+    //@include bg_sq(rgba(255, 228, 228, 1),rgba(255, 185, 167,1));
     display: flex;
     justify-content: center;
     align-items: center;
 
     .slide_inner {
         width: 100vw;
-
+        
         @include mq() {
             width: auto;
         }
-
+        text-align: center;
         margin: 3px;
         padding: 1em;
         overflow: auto;
         overflow-x: hidden;
-        background: #ddd;
+        background: rgb(255, 204, 204);
 
         &>h2 {
-            text-align: center;
             margin-bottom: 30px;
         }
-
-        &>p {
-            margin-bottom: 30px;
+        &>p{
+            display: inline-block;
+            text-align: left;
+            margin-bottom: 30px;           
         }
-
         &>.answer_box {
             display: table;
-            margin: auto;
+            margin: auto auto 30px;
 
             &>div {
                 display: table-cell;

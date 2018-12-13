@@ -147,7 +147,11 @@ Shindan.ShowSlide = function () {
         }, 300);
     }
 };
+
 Shindan.Init = function () {
+    var images = Shindan.Results.map(function(val){ return Shindan.ImgPath(val.src);});
+    images.push(Shindan.ImgPath("teach.jpg"));
+    Shindan.PreloadDeferred = Shindan.PreloadImagesSerial(images);
     $('.main_content').on('click', '.start_btn', function () {
         Shindan.State.AnsNo++;
         Shindan.MakeNextQuestion();
@@ -172,6 +176,7 @@ Shindan.Init = function () {
     });
 };
 Shindan.ShowResult = function () {
+    window.scrollTo(0,0);
     var resultType = Shindan.Questions
         .filter(function (val) {
             return val.result;
@@ -183,7 +188,7 @@ Shindan.ShowResult = function () {
     var result = Shindan.Results.find(function (val) {
         return val.target === resultType;
     });
-    Shindan.PreloadImagesSerial([Shindan.ImgPath(result.src), Shindan.ImgPath("teach.jpg")]).done(function () {
+    Shindan.PreloadDeferred.done(function () {
         $(".result_type_img").attr({
             "src": Shindan.ImgPath(result.src),
             "alt": resultType
