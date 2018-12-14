@@ -188,7 +188,7 @@ Shindan.ShowResult = function () {
     var result = Shindan.Results.find(function (val) {
         return val.target === resultType;
     });
-    Shindan.PreloadDeferred.done(function () {
+    Shindan.PreloadDeferred.always(function () {
         $(".result_type_img").attr({
             "src": Shindan.ImgPath(result.src),
             "alt": resultType
