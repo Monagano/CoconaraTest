@@ -204,6 +204,7 @@ Shindan.ShowResult = function () {
         circleSize = circleSize * 1.41;
         $(".animate_circle").css("margin-left", $(window).width() / 2);
         $(".animate_circle").show();
+        $(".quest_bg,.start_page").hide();
         $(".result").show();
         $(".animate_circle")
             .animate({
