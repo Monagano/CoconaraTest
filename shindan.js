@@ -168,6 +168,7 @@ Shindan.Init = function () {
         Shindan.MakeNextQuestion();
         Shindan.ShowSlide($(this).closest('.slide_question')); //hide slide
         if (Shindan.State.AnsNo > Shindan.Questions.length) {
+            alert("test0");
             Shindan.ShowResult();
             return;
         }
