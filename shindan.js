@@ -188,11 +188,12 @@ Shindan.ShowResult = function () {
     var result = Shindan.Results.find(function (val) {
         return val.target === resultType;
     });
-    Shindan.PreloadDeferred.always(function () {
+ //   Shindan.PreloadDeferred.always(function () {
         $(".result_type_img").attr({
             "src": Shindan.ImgPath(result.src),
             "alt": resultType
         });
+        $(".result_teach_img").attr("src","./images/teach.jpg");
         $(".result_type").text(resultType);
         $(".result_text").text(result.result_text);
         $(".result_prescription").text("そんな「" + resultType + "」から抜け出すコツをまとめた処方箋をプレゼントしています。" +
@@ -221,7 +222,7 @@ Shindan.ShowResult = function () {
                 $(this).hide();
                 $(this).dequeue();
             });
-    });
+   // });
 };
 Shindan.ImgPath = function (src) {
     return "./images/" + src;
