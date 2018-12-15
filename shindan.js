@@ -177,6 +177,7 @@ Shindan.Init = function () {
 };
 Shindan.ShowResult = function () {
     window.scrollTo(0,0);
+    alert("pp");
     var resultType = Shindan.mode(Shindan.Questions
             .filter(function (val) {
                 return val.result;
@@ -184,6 +185,7 @@ Shindan.ShowResult = function () {
             .map(function (val) {
                 return val.target;
             })) || "もやもや期"; //最頻値
+            alert(resultType);        
     var result = Shindan.Results.find(function (val) {
         return val.target === resultType;
     });
@@ -286,5 +288,5 @@ Shindan.mode = function (arr) {
 };
 $(function () {
     Shindan.Init();
-    alert("tes2");
+    alert("tes3");
 });
