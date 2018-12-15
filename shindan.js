@@ -168,7 +168,6 @@ Shindan.Init = function () {
         Shindan.MakeNextQuestion();
         Shindan.ShowSlide($(this).closest('.slide_question')); //hide slide
         if (Shindan.State.AnsNo > Shindan.Questions.length) {
-            alert("test0");
             Shindan.ShowResult();
             return;
         }
@@ -178,14 +177,13 @@ Shindan.Init = function () {
 };
 Shindan.ShowResult = function () {
     window.scrollTo(0,0);
-    var resultType = Shindan.Questions
-        .filter(function (val) {
-            return val.result;
-        })
-        .map(function (val) {
-            return val.target;
-        })
-        .mode() || "もやもや期"; //最頻値
+    var resultType = Shindan.mode(Shindan.Questions
+            .filter(function (val) {
+                return val.result;
+            })
+            .map(function (val) {
+                return val.target;
+            })) || "もやもや期"; //最頻値
     var result = Shindan.Results.find(function (val) {
         return val.target === resultType;
     });
@@ -252,8 +250,8 @@ Shindan.PreloadImagesSerial = function (srcs) {
     return d.promise();
 };
 
-Array.prototype.mode = function () {
-    if (this.length === 0) {
+Shindan.mode = function (arr) {
+    if (arr.length === 0) {
         //配列の個数が0だとエラーを返す。
         //throw new Error("配列の長さが0のため最頻値が計算できません");
         //nullを返しても困らない時(配列の中にnullが無い時)はnullを返すように実装しても良い。
@@ -268,13 +266,13 @@ Array.prototype.mode = function () {
     var maxCounter = 0;
     var maxValue = null;
 
-    for (var i = 0; i < this.length; i++) {
+    for (var i = 0; i < arr.length; i++) {
         //counterに存在しなければ作る。keyは型を区別する
-        if (!counter[this[i] + "_" + typeof this[i]]) {
-            counter[this[i] + "_" + typeof this[i]] = 0;
+        if (!counter[arr[i] + "_" + typeof arr[i]]) {
+            counter[arr[i] + "_" + typeof arr[i]] = 0;
         }
-        counter[this[i] + "_" + typeof this[i]]++;
-        nativeValues[this[i] + "_" + typeof this[i]] = this[i];
+        counter[arr[i] + "_" + typeof arr[i]]++;
+        nativeValues[arr[i] + "_" + typeof arr[i]] = arr[i];
 
     }
     for (var j = 0; j < Object.keys(counter).length; j++) {
