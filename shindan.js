@@ -42,44 +42,44 @@ Shindan.Questions.push({
     "target": "ぐるぐる期"
 });
 Shindan.Questions.push({
-    "text":"次に取得したい資格、学びたい事が次々生まれる。",
-    "target":"ぐるぐる期"
+    "text": "次に取得したい資格、学びたい事が次々生まれる。",
+    "target": "ぐるぐる期"
 });
 Shindan.Questions.push({
-    "text":"人から言われるアドバイスがピンとこない",
-    "target":"ぐるぐる期"
+    "text": "人から言われるアドバイスがピンとこない",
+    "target": "ぐるぐる期"
 });
 Shindan.Questions.push({
-    "text":"複数のスキルがあり、いったい自分の何が人から求められるだろうと考えてしまう",
-    "target":"ぐるぐる期"
+    "text": "複数のスキルがあり、いったい自分の何が人から求められるだろうと考えてしまう",
+    "target": "ぐるぐる期"
 });
 Shindan.Questions.push({
-    "text":"パーティーや交流会など華やかな場では気後れする",
-    "target":"こつこつ期"
+    "text": "パーティーや交流会など華やかな場では気後れする",
+    "target": "こつこつ期"
 });
 Shindan.Questions.push({
-    "text":"2年後も今の仕事で、より充実感を持てるようになることが目標だ",
-    "target":"こつこつ期"
+    "text": "2年後も今の仕事で、より充実感を持てるようになることが目標だ",
+    "target": "こつこつ期"
 });
 Shindan.Questions.push({
-    "text":"目標はあるが、人に伝えるのは恥ずかしい気がする。",
-    "target":"こつこつ期"
+    "text": "目標はあるが、人に伝えるのは恥ずかしい気がする。",
+    "target": "こつこつ期"
 });
 Shindan.Questions.push({
-    "text":"自撮りやインスタ映え写真をアップする事はあまり共感できない",
-    "target":"こつこつ期"
+    "text": "自撮りやインスタ映え写真をアップする事はあまり共感できない",
+    "target": "こつこつ期"
 });
 Shindan.Questions.push({
-    "text":"人から認められることが喜びにつながる",
-    "target":"がんがん期"
+    "text": "人から認められることが喜びにつながる",
+    "target": "がんがん期"
 });
 Shindan.Questions.push({
-    "text":"自分の直感を信じて行動できる",
-    "target":"がんがん期"
+    "text": "自分の直感を信じて行動できる",
+    "target": "がんがん期"
 });
 Shindan.Questions.push({
-    "text":"考えてばかりいるよりも、行動をすることが大事だと思う",
-    "target":"がんがん期"
+    "text": "考えてばかりいるよりも、行動をすることが大事だと思う",
+    "target": "がんがん期"
 });
 Shindan.Questions.push({
     "text": "今よりもステージアップするためには、行動の質と量を増やす事が大切だ。",
@@ -149,7 +149,9 @@ Shindan.ShowSlide = function () {
 };
 
 Shindan.Init = function () {
-    var images = Shindan.Results.map(function(val){ return Shindan.ImgPath(val.src);});
+    var images = Shindan.Results.map(function (val) {
+        return Shindan.ImgPath(val.src);
+    });
     images.push(Shindan.ImgPath("teach.jpg"));
     Shindan.PreloadDeferred = Shindan.PreloadImagesSerial(images);
     $('.main_content').on('click', '.start_btn', function () {
@@ -176,29 +178,24 @@ Shindan.Init = function () {
     });
 };
 Shindan.ShowResult = function () {
-    window.scrollTo(0,0);
-    var resultType = Shindan.mode(Shindan.Questions
-            .filter(function (val) {
-                return val.result;
-            })
-            .map(function (val) {
-                return val.target;
-            })) || "もやもや期"; //最頻値
-    // alert(Shindan.Results[0].target);
-    // var result = Shindan.Results.find(function (val) {
-    //     alert("results");
-    //     alert(val);
-    //     alert(resultType);
-    //     return val.target == resultType;
-    // });
-    var result = Shindan.Results[0];
-    alert("test");
- //   Shindan.PreloadDeferred.always(function () {
+    window.scrollTo(0, 0);
+    var resultType = Shindan.Questions
+        .filter(function (val) {
+            return val.result;
+        })
+        .map(function (val) {
+            return val.target;
+        })
+        .mode() || "もやもや期"; //最頻値
+    var result = Shindan.Results.find(function (val) {
+        return val.target === resultType;
+    });
+    Shindan.PreloadDeferred.always(function () {
         $(".result_type_img").attr({
             "src": Shindan.ImgPath(result.src),
             "alt": resultType
         });
-        $(".result_teach_img").attr("src","./images/teach.jpg");
+        $(".result_teach_img").attr("src", "./images/teach.jpg");
         $(".result_type").text(resultType);
         $(".result_text").text(result.result_text);
         $(".result_prescription").text("そんな「" + resultType + "」から抜け出すコツをまとめた処方箋をプレゼントしています。" +
@@ -209,11 +206,9 @@ Shindan.ShowResult = function () {
         }
         circleSize = circleSize * 1.41;
         $(".animate_circle").css("margin-left", $(window).width() / 2);
-        alert("test2");
         $(".animate_circle").show();
         $(".quest_bg,.start_page").hide();
         $(".result").show();
-        alert("test3");
         $(".animate_circle")
             .animate({
                 "margin-left": ($(window).width() - circleSize) / 2,
@@ -229,7 +224,7 @@ Shindan.ShowResult = function () {
                 $(this).hide();
                 $(this).dequeue();
             });
-   // });
+    });
 };
 Shindan.ImgPath = function (src) {
     return "./images/" + src;
@@ -255,8 +250,8 @@ Shindan.PreloadImagesSerial = function (srcs) {
     return d.promise();
 };
 
-Shindan.mode = function (arr) {
-    if (arr.length === 0) {
+Array.prototype.mode = function () {
+    if (this.length === 0) {
         //配列の個数が0だとエラーを返す。
         //throw new Error("配列の長さが0のため最頻値が計算できません");
         //nullを返しても困らない時(配列の中にnullが無い時)はnullを返すように実装しても良い。
@@ -271,13 +266,13 @@ Shindan.mode = function (arr) {
     var maxCounter = 0;
     var maxValue = null;
 
-    for (var i = 0; i < arr.length; i++) {
+    for (var i = 0; i < this.length; i++) {
         //counterに存在しなければ作る。keyは型を区別する
-        if (!counter[arr[i] + "_" + typeof arr[i]]) {
-            counter[arr[i] + "_" + typeof arr[i]] = 0;
+        if (!counter[this[i] + "_" + typeof this[i]]) {
+            counter[this[i] + "_" + typeof this[i]] = 0;
         }
-        counter[arr[i] + "_" + typeof arr[i]]++;
-        nativeValues[arr[i] + "_" + typeof arr[i]] = arr[i];
+        counter[this[i] + "_" + typeof this[i]]++;
+        nativeValues[this[i] + "_" + typeof this[i]] = this[i];
 
     }
     for (var j = 0; j < Object.keys(counter).length; j++) {
@@ -289,7 +284,28 @@ Shindan.mode = function (arr) {
     }
     return maxValue;
 };
+
+if (!Array.prototype.find) {
+    Array.prototype.find = function (predicate) {
+        if (this === null) {
+            throw new TypeError('Array.prototype.find called on null or undefined');
+        }
+        if (typeof predicate !== 'function') {
+            throw new TypeError('predicate must be a function');
+        }
+        var list = Object(this);
+        var length = list.length >>> 0;
+        var thisArg = arguments[1];
+        var value;
+        for (var i = 0; i < length; i++) {
+            value = list[i];
+            if (predicate.call(thisArg, value, i, list)) {
+                return value;
+            }
+        }
+        return undefined;
+    };
+}
 $(function () {
     Shindan.Init();
-    alert("tes56");
 });
