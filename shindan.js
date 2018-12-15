@@ -1,5 +1,6 @@
 var Shindan = Shindan || {};
 
+//質問配列
 Shindan.Questions = [];
 Shindan.Questions.push({
     "text": "何かに挑戦したいけど、今ひとつ自信がもてない",
@@ -85,13 +86,16 @@ Shindan.Questions.push({
     "text": "今よりもステージアップするためには、行動の質と量を増やす事が大切だ。",
     "target": "がんがん期"
 });
+//質問番号 初期ステータスは0
 Shindan.Questions.forEach(function (val) {
     //    console.log(val.text);
     val.status = 0;
 });
 Shindan.State = {};
+// 現在の質問番号
 Shindan.State.AnsNo = 0;
 
+// 結果配列
 Shindan.Results = [];
 Shindan.Results.push({
     "result_text": "このままでは嫌だ、という気持ちはあるけれど、いったいわたしは何がしたいの？と考えてもよくわからない。これかも！思い浮かんだことがあっても、すぐに違うかも？と自信がなくなってきてまう。そんな段階ではありませんか？",
@@ -118,6 +122,8 @@ Shindan.Results.push({
     "target": "がんがん期",
     "src": "ganganki.jpg"
 });
+
+//次の質問を生成
 Shindan.MakeNextQuestion = function () {
     var target = Shindan.Questions.filter(function (val) {
         return val.status === 0;
@@ -125,6 +131,7 @@ Shindan.MakeNextQuestion = function () {
     if (target.length === 0) {
         return;
     }
+    //質問のベースをコピー
     $(".slide_question_base").clone()
         .removeClass("slide_question_base")
         .addClass("slide_question").appendTo('.main_content');
@@ -134,6 +141,7 @@ Shindan.MakeNextQuestion = function () {
     $quest.find("h2").text("Question " + Shindan.State.AnsNo);
     $quest.find(".question_text").text(qTarget.text);
 };
+//スライド切り替え
 Shindan.ShowSlide = function () {
     if ($quest.hasClass('off')) {
         $quest.removeClass('off');
@@ -147,21 +155,33 @@ Shindan.ShowSlide = function () {
         }, 300);
     }
 };
-
+Shindan.BtnDisable = false;
+//初期処理
 Shindan.Init = function () {
     var images = Shindan.Results.map(function (val) {
         return Shindan.ImgPath(val.src);
     });
     images.push(Shindan.ImgPath("teach.jpg"));
     Shindan.PreloadDeferred = Shindan.PreloadImagesSerial(images);
+    //診断ボタンイベント
     $('.main_content').on('click', '.start_btn', function () {
+        if (Shindan.BtnDisable) {
+            return;
+        }
+        Shindan.BtnDisable = true;
         Shindan.State.AnsNo++;
         Shindan.MakeNextQuestion();
         $('.quest_bg').show();
         $quest = $('.slide_question').last(); //show slide
         Shindan.ShowSlide($quest);
+        Shindan.BtnDisable = false;
     });
+    //yes_noクリックイベント
     $('.main_content').on('click', '.quest_btn', function () {
+        if (Shindan.BtnDisable) {
+            return;
+        }
+        Shindan.BtnDisable = true;
         var currentQ = Shindan.Questions.filter(function (val) {
             return val.status === Shindan.State.AnsNo;
         });
@@ -173,10 +193,12 @@ Shindan.Init = function () {
             Shindan.ShowResult();
             return;
         }
-        $quest = $('.slide_question').last(); //show slide
-        Shindan.ShowSlide($quest);
+        $quest = $('.slide_question').last();
+        Shindan.ShowSlide($quest); //show slide
+        Shindan.BtnDisable = false;
     });
 };
+//結果表示処理
 Shindan.ShowResult = function () {
     window.scrollTo(0, 0);
     var resultType = Shindan.Questions
@@ -226,9 +248,11 @@ Shindan.ShowResult = function () {
             });
     });
 };
+//画像パス取得
 Shindan.ImgPath = function (src) {
     return "./images/" + src;
 };
+//画像プリロード
 Shindan.Preload = function (src) {
     var d = $.Deferred();
     var img = new Image;
@@ -237,6 +261,7 @@ Shindan.Preload = function (src) {
     img.src = src;
     return d.promise();
 };
+//画像直列プリロード
 Shindan.PreloadImagesSerial = function (srcs) {
     var d = $.Deferred();
     var src = srcs.shift();
@@ -249,7 +274,7 @@ Shindan.PreloadImagesSerial = function (srcs) {
     }
     return d.promise();
 };
-
+//最頻値取得
 Array.prototype.mode = function () {
     if (this.length === 0) {
         //配列の個数が0だとエラーを返す。
@@ -284,7 +309,7 @@ Array.prototype.mode = function () {
     }
     return maxValue;
 };
-
+//findのポリフィル
 if (!Array.prototype.find) {
     Array.prototype.find = function (predicate) {
         if (this === null) {
