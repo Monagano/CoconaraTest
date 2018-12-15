@@ -286,5 +286,5 @@ Shindan.mode = function (arr) {
 };
 $(function () {
     Shindan.Init();
-    alert("tes");
+    alert("tes2");
 });
