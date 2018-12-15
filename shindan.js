@@ -186,6 +186,9 @@ Shindan.ShowResult = function () {
             })) || "もやもや期"; //最頻値
     alert(Shindan.Results[0].target);
     var result = Shindan.Results.find(function (val) {
+        alert("results");
+        alert(val);
+        alert(resultType);
         return val.target == resultType;
     });
     alert("test");
@@ -287,5 +290,5 @@ Shindan.mode = function (arr) {
 };
 $(function () {
     Shindan.Init();
-    alert("tes4");
+    alert("tes5");
 });
