@@ -188,6 +188,7 @@ Shindan.ShowResult = function () {
     var result = Shindan.Results.find(function (val) {
         return val.target === resultType;
     });
+    alert("test");
  //   Shindan.PreloadDeferred.always(function () {
         $(".result_type_img").attr({
             "src": Shindan.ImgPath(result.src),
@@ -204,9 +205,11 @@ Shindan.ShowResult = function () {
         }
         circleSize = circleSize * 1.41;
         $(".animate_circle").css("margin-left", $(window).width() / 2);
+        alert("test2");
         $(".animate_circle").show();
         $(".quest_bg,.start_page").hide();
         $(".result").show();
+        alert("test3");
         $(".animate_circle")
             .animate({
                 "margin-left": ($(window).width() - circleSize) / 2,
