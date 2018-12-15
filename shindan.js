@@ -184,13 +184,14 @@ Shindan.ShowResult = function () {
             .map(function (val) {
                 return val.target;
             })) || "もやもや期"; //最頻値
-    alert(Shindan.Results[0].target);
-    var result = Shindan.Results.find(function (val) {
-        alert("results");
-        alert(val);
-        alert(resultType);
-        return val.target == resultType;
-    });
+    // alert(Shindan.Results[0].target);
+    // var result = Shindan.Results.find(function (val) {
+    //     alert("results");
+    //     alert(val);
+    //     alert(resultType);
+    //     return val.target == resultType;
+    // });
+    var result = Shindan.Results[0];
     alert("test");
  //   Shindan.PreloadDeferred.always(function () {
         $(".result_type_img").attr({
@@ -290,5 +291,5 @@ Shindan.mode = function (arr) {
 };
 $(function () {
     Shindan.Init();
-    alert("tes5");
+    alert("tes56");
 });
