@@ -288,4 +288,5 @@ Array.prototype.mode = function () {
 };
 $(function () {
     Shindan.Init();
+    alert("tes");
 });
